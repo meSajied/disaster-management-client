@@ -32,6 +32,9 @@ function DailyFinancialStats() {
   return (
       <div className='p-4 w-full max-w-4xl mx-auto'>
         <div className='bg-white p-4 shadow rounded'>
+          <div className='text-xl text-center font-semibold'>
+            Statistics of donation and expenses
+          </div>
           <BarChart data={cData} />
         </div>
       </div>
