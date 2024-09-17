@@ -1,4 +1,5 @@
-import {DailyFinancialStats} from "../component/DailyFinancialStats";
+import {DailyFinancialStats} from
+    "../component/DailyFinancialStats";
 
 function HomePage() {
 
