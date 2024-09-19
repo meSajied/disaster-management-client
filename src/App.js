@@ -9,6 +9,8 @@ import {Donation} from "./pages/donation";
 import {Crisis} from "./pages/Crisis";
 import {Volunteer} from "./pages/Volunteer";
 import {Navbar} from "./component/Navbar";
+import {Logout} from "./account/Logout";
+import {Profile} from "./pages/Profile";
 
 function App() {
   return (
@@ -19,10 +21,12 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Signup />} />
+            <Route path="/logout" element={<Logout />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/donation" element={<Donation />} />
             <Route path="/crisis" element={<Crisis />} />
             <Route path="/volunteer" element={<Volunteer />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
