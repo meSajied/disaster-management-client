@@ -11,6 +11,7 @@ import {Volunteer} from "./pages/Volunteer";
 import {Navbar} from "./component/Navbar";
 import {Logout} from "./account/Logout";
 import {Profile} from "./pages/Profile";
+import {Admin} from "./pages/Admin";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/crisis" element={<Crisis />} />
             <Route path="/volunteer" element={<Volunteer />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

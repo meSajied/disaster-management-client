@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 
 function Navbar() {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
+  const username = 'admin';
 
   return (
       <nav className='flex justify-between items-center p-4 mb-3'>
@@ -10,9 +11,11 @@ function Navbar() {
           <Link className='border-2 border-black rounded p-1' to="/crisis">Crisis</Link>
           <Link className='border-2 border-black rounded p-1' to="/donation">Donation</Link>
           <Link className='border-2 border-black rounded p-1' to="/volunteer">Volunteer</Link>
+          {isLoggedIn && username === 'admin' &&
+              (<Link className='border-2 border-black rounded p-1' to="/admin">Admin</Link>)}
         </div>
 
-        {isLoggedIn ? <LoginSignup /> : UserDashboard("hello")}
+        {isLoggedIn ? UserDashboard("hello") : <LoginSignup />}
       </nav>
   );
 }
