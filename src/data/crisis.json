@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "hello",
+    "image": "logo192.png",
+    "location": "Dhaka",
+    "severity": "High",
+    "status": "PENDING"
+  },
+  {
+    "id": 1,
+    "title": "hello",
+    "image": "logo192.png",
+    "location": "Dhaka",
+    "severity": "High",
+    "status": "APPROVED"
+  }
+]
