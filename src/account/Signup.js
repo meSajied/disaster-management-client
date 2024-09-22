@@ -4,16 +4,16 @@ import axios from "axios";
 
 import {useAuth} from "./Authentication";
 import {Navigate} from "react-router";
+import { fetcher } from "../fetcher";
 
 const Signup = () => {
   const {isLoggedIn, login} = useAuth();
 
   const [showWarning, setShowWarning] = useState(false);
   const [formData, setFormData] = useState({
-    id: v4(),
-    firstName: "",
-    lastName: "",
-    email: "",
+    username: "",
+    name: "",
+    phone: "",
     password: "",
   });
 
@@ -46,39 +46,35 @@ const Signup = () => {
               </div>
           )}
         <form onSubmit={handleLogin} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div>
-            <input type='hidden' name='id' value={formData.id}
-            required/>
-          </div>
-
+          
           <div className="mb-4">
-            <label htmlFor='firstName' className="block text-gray-700 text-sm font-bold mb-2">
-              First Name:
+            <label htmlFor='username' className="block text-gray-700 text-sm font-bold mb-2">
+              Username:
             </label>
-            <input type='text' name='firstName' className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    value={formData.firstName}
+            <input type='text' name='username' className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    value={formData.username}
                    onChange={handleChange}
                    required
             />
           </div>
 
           <div className="mb-4">
-            <label htmlFor='lastName' className="block text-gray-700 text-sm font-bold mb-2">
-              Last Name:
+            <label htmlFor='name' className="block text-gray-700 text-sm font-bold mb-2">
+              Name:
             </label>
-            <input type='text' name='lastName' className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    value={formData.lastName}
+            <input type='text' name='name' className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    value={formData.name}
                    onChange={handleChange}
                    required
             />
           </div>
 
           <div className="mb-4">
-            <label htmlFor='email' className="block text-gray-700 text-sm font-bold mb-2">
-              Email:
+            <label htmlFor='phone' className="block text-gray-700 text-sm font-bold mb-2">
+              Phone No.:
             </label>
-            <input type='email' name='email' className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    value={formData.email}
+            <input type='phone' name='phone' className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    value={formData.phone}
                    onChange={handleChange}
                    required
             />
@@ -108,14 +104,18 @@ const Signup = () => {
   async function handleLogin(e) {
     e.preventDefault();
 
+    //console.log(formData);
+
     try {
-      await axios.post('http://localhost:4414/applicant/signup', formData, {
+      await fetcher.post('/user/signup', formData, {
         headers: {
           "Content-Type": "application/json"
         }
       })
           .then(res => {
-            if(res.data?.email && res.data?.id) {
+            console.log(res);
+            if(res.data?.username) {
+              console.log(formData);
               login(res.data);
             } else {
               setShowWarning(true);
@@ -128,14 +128,15 @@ const Signup = () => {
       clearData();
       setShowWarning(true);
     }
+  
   }
+  
 
   function clearData() {
     setFormData({
-      id: v4(),
-      firstName: "",
-      lastName: "",
-      email: "",
+      username: "",
+      name: "",
+      phone: "",
       password: "",
   });
   }

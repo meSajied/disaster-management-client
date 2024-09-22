@@ -11,7 +11,8 @@ export const AuthProvider = ({children}) => {
     cookie? setUser(JSON.parse(cookie)): setUser({});
   }, []);
 
-  const isLoggedIn = !!(user?.email && user?.id);
+  const isLoggedIn = !!(user?.username);
+  const isAdmin = user?.username === 'admin';
 
   function login(user) {
     setUser(user);
@@ -25,7 +26,7 @@ export const AuthProvider = ({children}) => {
   }
 
   return(
-      <AuthContext.Provider value={{user, login, isLoggedIn, logout}}>
+      <AuthContext.Provider value={{user, isAdmin, login, isLoggedIn, logout}}>
         {children}
       </AuthContext.Provider>
   )
