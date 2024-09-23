@@ -78,16 +78,15 @@ const Login = () => {
 
   async function handleLogin(e) {
     e.preventDefault();
+    console.log(formData);
 
     try {
-      await fetcher.get('/user/login', {
-        params: {
-          username: formData.username,
-          password: formData.password
-        },
+      await fetcher.post('/user/login', formData, {
         headers: {
           "Content-Type": "application/json"
-        }})
+        },
+        withCredentials:true
+        })
           .then(res => {
             
             if(res.data?.username){
@@ -96,7 +95,7 @@ const Login = () => {
               setShowWarning(true);
             }
 
-            clearData();
+            //clearData();
 
           });
     }catch(e) {
@@ -108,7 +107,7 @@ const Login = () => {
 
   function clearData() {
     setFormData({
-      email: "",
+      username: "",
       password: ""
     })
   }

@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import costData from "../data/CostData.json";
 import {BarChart} from "./BarChart";
 
+import {fetcher} from "../fetcher";
+
 function DailyFinancialStats() {
   const [cData, setCData] = useState({
     labels: [],
@@ -12,21 +14,34 @@ function DailyFinancialStats() {
   });
 
   useEffect(() => {
-    if (costData && costData.length > 0) {
-      setCData({
-        labels: costData.map((item) => item.date),
-        datasets: [{
-          label: "Gain",
-          data: costData.map((item) => item.gain),
-          backgroundColor: "rgba(253, 173, 0, 0.6)",
-        },
-          {
-            label: "Expense",
-            data: costData.map((item) => item.expense),
-            backgroundColor: "rgba(0, 0, 0, 0.6)"
-          }]
-      });
-    }
+    const FetchData = async () => {
+      try {
+        const res = await fetcher.get("/cost/all");
+        const costData = res.data;
+
+        if (costData && costData.length > 0) {
+          setCData({
+            labels: costData.map((item) => item.createdAt),
+            datasets: [
+              {
+                label: "Donation",
+                data: costData.map((item) => item.donation),
+                backgroundColor: "rgba(253, 173, 0, 0.6)",
+              },
+              {
+                label: "Expenses",
+                data: costData.map((item) => item.expenses),
+                backgroundColor: "rgba(0, 0, 0, 0.6)",
+              },
+            ],
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    FetchData();
   }, []);
 
   return (

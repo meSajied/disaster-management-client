@@ -15,6 +15,7 @@ const Signup = () => {
     name: "",
     phone: "",
     password: "",
+    task: "None"
   });
 
   if(isLoggedIn) {
@@ -115,7 +116,6 @@ const Signup = () => {
           .then(res => {
             console.log(res);
             if(res.data?.username) {
-              console.log(formData);
               login(res.data);
             } else {
               setShowWarning(true);
