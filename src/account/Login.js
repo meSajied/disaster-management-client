@@ -81,11 +81,11 @@ const Login = () => {
     console.log(formData);
 
     try {
-      await fetcher.post('/user/login', formData, {
+      await fetcher.get('/user/login', {
+        params: formData,
         headers: {
           "Content-Type": "application/json"
-        },
-        withCredentials:true
+        }
         })
           .then(res => {
             
@@ -94,9 +94,8 @@ const Login = () => {
             } else {
               setShowWarning(true);
             }
-
-            //clearData();
-
+            
+            clearData();
           });
     }catch(e) {
       console.log(e);

@@ -37,7 +37,7 @@ function Profile() {
   }
 
   return (
-      <div onSubmit={toggleProfile} className='ml-4 mr-4 pl-6 pr-6'>
+      <div onSubmit={handleSubmit} className='ml-4 mr-4 pl-6 pr-6'>
         <div className='text-4xl'>Edit Profile</div>
 
         <div className='w-[75%] flex flex-col items-center'>
@@ -96,18 +96,16 @@ function Profile() {
     e.preventDefault();
 
     try {
-      const response = await fetcher.put('/user/update', userData, {
+      await fetcher.put('/user/update', userData, {
         headers: {
           "Content-Type": "application/json"
         }
       });
 
-      // Handle the response, e.g., log success or redirect
-      console.log(response.data); // Assuming you're interested in the data returned
+      toggleProfile(e);
 
     } catch (err) {
-      // Handle errors, e.g., log error message
-      console.error('Signup error:', err.message);
+      console.error(err.message);
     }
   }
 }
